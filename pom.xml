@@ -26,11 +26,6 @@
             <artifactId>junit</artifactId>
             <version>RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>RELEASE</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
         <dependency>
             <groupId>org.jsoup</groupId>
@@ -40,8 +35,5 @@
 
 
     </dependencies>
-
-
-
 
 </project>
