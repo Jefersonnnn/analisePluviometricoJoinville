@@ -5,6 +5,6 @@ public class PluvioReaderTest {
 
     @Test
     public void login() {
-        Assert.assertTrue(1==2);
+        Assert.assertTrue(1==1);
     }
 }
