@@ -14,7 +14,6 @@ public class PluvioAnalise {
     PluvioReader pr;
     JFileChooser file;
     Scanner scanner;
-    int[] meses;
 
     public PluvioAnalise() {
         pr = new PluvioReader();
@@ -35,7 +34,7 @@ public class PluvioAnalise {
             while (true) {
                 scanner = new Scanner(System.in);
                 System.out.println("Informe os meses para análise");
-                System.out.println("Digite o mês e ano a ser analisado [2 2016] : ");
+                System.out.println("Digite o mês e ano para ser analisado [2 2016] : ");
                 analiseMediaMesAno(scanner.nextInt(), scanner.nextInt());
 
                 System.out.println("");
@@ -46,7 +45,7 @@ public class PluvioAnalise {
     }
 
 
-    public double analiseMediaMesAno(int mes, int ano) {
+    public void analiseMediaMesAno(int mes, int ano) {
         System.out.format("MES %s, ANO %d\n", PluvioHelper.intToMonth(mes), ano);
         int count = 0;
         float media, total = 0, maximo = 0, minimo = 500;
@@ -92,27 +91,28 @@ public class PluvioAnalise {
 
         media = total / count;
         mediaAnterior = totalAnterior / countAnterior;
+
+        // Resultados do mes/ano referência
+        imprimeResultado(mes, ano, total, media, maximo, diaMaximo, minimo, diaMinimo, count);
+
+        // Resultado do mes/ano anterior ao referência
+        imprimeResultado(mes, ano-1, totalAnterior, mediaAnterior, maximoAnterior, diaMaximoAnterior, minimoAnterior, diaMinimoAnterior, countAnterior);
+
+        scanner.nextLine();
+
+
+    }
+
+    private void imprimeResultado(int mes, int ano, float total,float media, float maximo, LocalDate diaMaximo, float minimo, LocalDate diaMinimo, int totalDados){
         System.out.println("|------------------------------------");
         System.out.printf("|  %s de %d\n", PluvioHelper.intToMonth(mes), ano);
         System.out.printf("|- Total de chuva: %f mm\n", total);
         System.out.printf("|- Média de chuva: %f mm\n", media);
         System.out.printf("|- Máximo - Dia %s com %f mm de chuva\n", diaMaximo != null ? PluvioHelper.formatarData(diaMaximo) : "00/00/00", maximo);
         System.out.printf("|- Mínimo - Dia %s com %f mm de chuva\n", diaMinimo != null ? PluvioHelper.formatarData(diaMinimo) : "00/00/00", minimo != 500 ? minimo : 0);
-        System.out.println(count + " dados encontrados");
+        System.out.println(totalDados + " dados encontrados");
         System.out.println("|------------------------------------");
 
-
-        System.out.printf("|  %s de %d\n", PluvioHelper.intToMonth(mes), ano - 1);
-        System.out.printf("|- Total de chuva: %f mm\n", totalAnterior);
-        System.out.printf("|- Média de chuva: %f mm\n", mediaAnterior);
-        System.out.printf("|- Máximo - Dia %s com %f mm de chuva\n", diaMaximoAnterior != null ? PluvioHelper.formatarData(diaMaximoAnterior) : "00/00/00", maximoAnterior);
-        System.out.printf("|- Mínimo - Dia %s com %f mm de chuva\n", diaMinimoAnterior != null ? PluvioHelper.formatarData(diaMinimoAnterior) : "00/00/00", minimoAnterior != 500 ? minimoAnterior : 0);
-        System.out.println(countAnterior + " dados encontrados");
-        System.out.println("|------------------------------------");
-        scanner.nextLine();
-
-
-        return 0;
     }
 
 
